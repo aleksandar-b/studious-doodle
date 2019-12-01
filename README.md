@@ -1,15 +1,17 @@
+## Usage
+
 Here's what it looks like:
 
 ```javascript
 markerTail({
     d: 'M0,200 L280 0 320 60 0 600',
     markerOptions: {
-    head: {
+        head: {
             elem: 'circle',
             fill: 'white',
             r: 5
         },
-    tail: {
+        tail: {
             fill: 'none',
             stroke: 'white',
             'stroke-width': 1,
