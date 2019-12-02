@@ -31,10 +31,10 @@ markerTail({
 
 ## Properties Overview 
 
-| Prop          | Required | Description                  | Default                  |
+| Property          | Required | Description                  | Default                  |
 |---------------|----------|------------------------------|--------------------------|
 | svg           | ❌        | svg container                | first svg element in DOM |
-| path          | ✅        | path d attribute             | none                     |
+| d            | ✅        | path d attribute             | none                     |
 | markerOptions | ❌        | head and tail svg attributes | see default marker options   |
 
 
