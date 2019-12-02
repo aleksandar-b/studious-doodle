@@ -33,7 +33,7 @@ markerTail({
 
 | Property          | Required | Description                  | Default                  |
 |---------------|----------|------------------------------|--------------------------|
-| svg           | ❌        | svg container                | first svg element in DOM |
+| svg           | ❌        | svg container css selector    | first svg element in DOM |
 | d            | ✅        | path d attribute             | none                     |
 | markerOptions | ❌        | head and tail svg attributes | see default marker options   |
 
