@@ -1,0 +1,25 @@
+{
+  "name": "studios-doodle",
+  "version": "1.0.0",
+  "description": "SVG JavaScript utility to Animate marker element along path with tail",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksandar-b/studious-doodle.git"
+  },
+  "keywords": [
+    "svg",
+    "animation",
+    "motion",
+    "widget"
+  ],
+  "author": "Aleksandar Brajkovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aleksandar-b/studious-doodle/issues"
+  },
+  "homepage": "https://github.com/aleksandar-b/studious-doodle#readme"
+}
