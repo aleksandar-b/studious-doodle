@@ -33,8 +33,8 @@ studiousDoodle({
 
 | Property          | Required | Description                  | Default                  |
 |---------------|----------|------------------------------|--------------------------|
-| svg           | ❌        | svg container css selector    | first svg element in DOM |
 | d            | ✅        | path d attribute             | ❌                     |
+| svg           | ❌        | svg container css selector    | first svg element in DOM |
 | markerOptions | ❌        | head and tail svg attributes | see default marker options   |
 | onEnd | ❌        | on end callback | see default marker options   
 
