@@ -3,7 +3,7 @@
 Here's what it looks like:
 
 ```javascript
-markerTail({
+studiousDoodle({
     d: 'M0,200 L280 0 320 60 0 600',
     markerOptions: {
         head: {
@@ -34,8 +34,9 @@ markerTail({
 | Property          | Required | Description                  | Default                  |
 |---------------|----------|------------------------------|--------------------------|
 | svg           | ❌        | svg container css selector    | first svg element in DOM |
-| d            | ✅        | path d attribute             | none                     |
+| d            | ✅        | path d attribute             | ❌                     |
 | markerOptions | ❌        | head and tail svg attributes | see default marker options   |
+| onEnd | ❌        | on end callback | see default marker options   
 
 
 ###### Default marker options
@@ -53,6 +54,8 @@ markerTail({
             stroke: 'black',
             'stroke-dasharray': 3
         },
+        onEnd: ({ marker, dashed }) => null;
+        
     }
 
 
