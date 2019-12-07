@@ -36,8 +36,8 @@ studiousDoodle({
 | speed | No        | speed of animation | see default marker options   |
 | head | No        | head svg element and attributes | see default marker options   |
 | tail | No        | tail svg attributes | see default marker options   |
-| head | No        | head element | see default marker options   |
-| onEnd | No        | on end callback | noop   
+| onEnd | No        | on end callback | noop |  
+| onStart | No        | on start callback | noop |
 
 
 ###### Default marker options
