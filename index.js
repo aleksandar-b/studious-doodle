@@ -1,14 +1,14 @@
 (() => {
-    const setAttributesFromOptions = (d, dashed, markerOptions, marker) => {
+    const setAttributesFromOptions = (d, tail, markerOptions, head) => {
         const [M] = d.split(/(?=[LMC])/);
-        dashed.setAttribute('d', M);
+        tail.setAttribute('d', M);
 
         Object.keys(markerOptions.tail).forEach((attr) => {
-            dashed.setAttribute(attr, markerOptions.tail[attr]);
+            tail.setAttribute(attr, markerOptions.tail[attr]);
         });
 
         Object.keys(markerOptions.head).forEach((attr) => {
-            marker.setAttribute(attr, markerOptions.head[attr]);
+            head.setAttribute(attr, markerOptions.head[attr]);
         });
     };
 
@@ -20,7 +20,7 @@
 
     const running = (idx, totalLength) => idx < totalLength;
 
-    const followAlongPath = (markerOptions, clone, dashed, marker, totalLength, onEnd) => {
+    const followAlongPath = (markerOptions, clone, tail, head, totalLength, onEnd) => {
         let idx = 0;
         const speed = markerOptions.speed || 2;
         let destroy = null;
@@ -31,9 +31,9 @@
                 y
             } = clone.getPointAtLength(idx);
 
-            dashed.setAttribute('d', dashed.getAttribute('d') + ' ' + "L " + x + ',' + y);
-            marker.setAttribute('cx', x);
-            marker.setAttribute('cy', y);
+            tail.setAttribute('d', tail.getAttribute('d') + ' ' + "L " + x + ',' + y);
+            head.setAttribute('cx', x);
+            head.setAttribute('cy', y);
 
             if (running(idx, totalLength)) {
                 idx = idx + speed;
@@ -43,8 +43,8 @@
 
                 if (typeof onEnd === 'function') {
                     onEnd({
-                        marker,
-                        dashed
+                        head,
+                        tail
                     });
                 }
             }
@@ -54,64 +54,65 @@
     };
 
     const bootstrap = ({
-                           svg,
-                           d,
-                           markerOptions,
-                           onEnd
-                       }) => {
+        svg,
+        d,
+        markerOptions,
+        onEnd
+    }) => {
 
-        const marker = document.createElementNS('http://www.w3.org/2000/svg', markerOptions.head.elem);
-        const dashed = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const head = document.createElementNS('http://www.w3.org/2000/svg', markerOptions.head.elem);
+        const tail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-        setAttributesFromOptions(d, dashed, markerOptions, marker);
+        setAttributesFromOptions(d, tail, markerOptions, head);
 
         const context = document.querySelector(svg);
-
-        context.appendChild(marker);
-        context.appendChild(dashed);
+        context.appendChild(head);
+        context.appendChild(tail);
 
         const clone = createClone(d);
         const totalLength = clone.getTotalLength();
 
-        followAlongPath(markerOptions, clone, dashed, marker, totalLength, onEnd);
+        followAlongPath(markerOptions, clone, tail, head, totalLength, onEnd);
     };
 
-    const markerTail = ({
-                            svg = 'svg',
-                            d,
-                            markerOptions = {},
-                            onEnd
-                        }) => {
-        const markerDefaults = {
-            speed: 3,
-            head: {
+    const studiousDoodle = ({
+        svg = 'svg',
+        d,
+        speed,
+        head,
+        tail,
+        onEnd
+    }) => {
+        const markerOptions = {
+            speed: speed || 3,
+            head: head || {
                 elem: 'circle',
                 fill: 'black',
                 r: 2
             },
-            tail: {
+            tail: tail || {
                 fill: 'none',
                 stroke: 'black',
                 'stroke-dasharray': 3
             },
-            onEnd: () => {
+            onEnd: onEnd || (() => {
                 return null;
-            }
+            })
         };
 
 
         bootstrap({
             svg,
             d,
-            markerOptions: Object.assign({}, markerDefaults, markerOptions),
+            markerOptions,
             onEnd
         });
     };
 
 
     if (typeof module !== "undefined" && module.exports) {
-        module.exports = markerTail;
+        module.exports = studiousDoodle;
     } else {
-        window.studiousDoodle = markerTail;
+        window.studiousDoodle = studiousDoodle;
     }
 })()

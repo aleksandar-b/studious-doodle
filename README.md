@@ -5,19 +5,17 @@ Here's what it looks like:
 ```javascript
 studiousDoodle({
     d: 'M0,200 L280 0 320 60 0 600',
-    markerOptions: {
-        head: {
-            elem: 'circle',
-            fill: 'white',
-            r: 5
-        },
-        tail: {
-            fill: 'none',
-            stroke: 'white',
-            'stroke-width': 1,
-            'stroke-dasharray': 4
+    head: {
+        elem: 'circle',
+        fill: 'white',
+        r: 5
     },
-  }
+    tail: {
+        fill: 'none',
+        stroke: 'white',
+        'stroke-width': 1,
+        'stroke-dasharray': 4
+    }
 });
 ```
 
@@ -33,17 +31,20 @@ studiousDoodle({
 
 | Property          | Required | Description                  | Default                  |
 |---------------|----------|------------------------------|--------------------------|
-| d            | ✅        | path d attribute             | ❌                     |
-| svg           | ❌        | svg container css selector    | first svg element in DOM |
-| markerOptions | ❌        | head and tail svg attributes | see default marker options   |
-| onEnd | ❌        | on end callback | noop   
+| d            | Yes        | path d attribute             | none                     |
+| svg           | No        | svg container css selector    | first svg element in DOM |
+| speed | No        | speed of animation | see default marker options   |
+| head | No        | head svg element and attributes | see default marker options   |
+| tail | No        | tail svg attributes | see default marker options   |
+| head | No        | head element | see default marker options   |
+| onEnd | No        | on end callback | noop   
 
 
 ###### Default marker options
 
 ```javascript
-{
-        speed: 3, // 1..Infinity
+    {
+        speed: 3, 
         head: {
             elem: 'circle', // any svg element
             fill: 'black',
@@ -54,7 +55,7 @@ studiousDoodle({
             stroke: 'black',
             'stroke-dasharray': 3
         }
-    }
+    }       
 
 
 ```
