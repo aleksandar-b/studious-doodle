@@ -51,6 +51,11 @@
         };
 
         destroy = requestAnimationFrame(run);
+
+        onStart({
+            head,
+            tail
+        })
     };
 
     const bootstrap = ({
@@ -81,7 +86,8 @@
         speed,
         head,
         tail,
-        onEnd
+        onEnd,
+        onStart
     }) => {
         const markerOptions = {
             speed: speed || 3,
@@ -96,6 +102,9 @@
                 'stroke-dasharray': 3
             },
             onEnd: onEnd || (() => {
+                return null;
+            }),
+            onStart: onStart || (() => {
                 return null;
             })
         };
