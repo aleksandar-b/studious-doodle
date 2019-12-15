@@ -1,6 +1,6 @@
 {
   "name": "studios-doodle",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "SVG JavaScript utility to Animate marker element along path with tail",
   "main": "index.js",
   "scripts": {
