@@ -89,6 +89,11 @@
         }
 
         followAlongPath(markerOptions, clone, tail, head, totalLength, onEnd, onStart);
+
+        onStart({
+            tail,
+            head
+        })
     };
 
     const studiousDoodle = ({
@@ -111,13 +116,7 @@
                 fill: 'none',
                 stroke: 'black',
                 'stroke-dasharray': 3
-            },
-            onEnd: onEnd || (() => {
-                return null;
-            }),
-            onStart: onStart || (() => {
-                return null;
-            })
+            }
         };
 
 
@@ -125,7 +124,12 @@
             svg,
             d,
             markerOptions,
-            onEnd
+            onEnd: (() => {
+                return null;
+            }),
+            onStart: onStart || (() => {
+                return null;
+            })
         });
     };
 
