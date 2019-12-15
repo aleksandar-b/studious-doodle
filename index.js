@@ -1,7 +1,14 @@
 (() => {
+    const isPathString = (d) => typeof d === 'string'
+
     const setAttributesFromOptions = (d, tail, markerOptions, head) => {
-        const [M] = d.split(/(?=[LMC])/);
-        tail.setAttribute('d', M);
+        if (isPathString(d)) {
+            const [M] = d.split(/(?=[LMC])/);
+            tail.setAttribute('d', M);
+        } else {
+            const m = d.getPointAtLength(0);
+            tail.setAttribute('d', `M${m.x} ${m.y}`);
+        }
 
         Object.keys(markerOptions.tail).forEach((attr) => {
             tail.setAttribute(attr, markerOptions.tail[attr]);
@@ -12,7 +19,7 @@
         });
     };
 
-    const createClone = d => {
+    const createClonePath = d => {
         const clone = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         clone.setAttribute('d', d);
         return clone;
@@ -20,7 +27,7 @@
 
     const running = (idx, totalLength) => idx < totalLength;
 
-    const followAlongPath = (markerOptions, clone, tail, head, totalLength, onEnd) => {
+    const followAlongPath = (markerOptions, clone, tail, head, totalLength, onEnd, onStart) => {
         let idx = 0;
         const speed = markerOptions.speed || 2;
         let destroy = null;
@@ -51,20 +58,15 @@
         };
 
         destroy = requestAnimationFrame(run);
-
-        onStart({
-            head,
-            tail
-        })
     };
 
     const bootstrap = ({
         svg,
         d,
         markerOptions,
-        onEnd
+        onEnd,
+        onStart
     }) => {
-
         const head = document.createElementNS('http://www.w3.org/2000/svg', markerOptions.head.elem);
         const tail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
@@ -74,10 +76,19 @@
         context.appendChild(head);
         context.appendChild(tail);
 
-        const clone = createClone(d);
-        const totalLength = clone.getTotalLength();
+        let clone = null;
+        let totalLength = null;
 
-        followAlongPath(markerOptions, clone, tail, head, totalLength, onEnd);
+        if (isPathString(d)) {
+            clone = createClonePath(d);
+            totalLength = clone.getTotalLength();
+        } else {
+            clone = d;
+            totalLength = clone.getTotalLength();
+
+        }
+
+        followAlongPath(markerOptions, clone, tail, head, totalLength, onEnd, onStart);
     };
 
     const studiousDoodle = ({
