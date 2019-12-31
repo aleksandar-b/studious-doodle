@@ -14,7 +14,9 @@
     "svg",
     "animation",
     "motion",
-    "widget"
+    "widget",
+    "trail",
+    "tracer"
   ],
   "author": "Aleksandar Brajkovic",
   "license": "ISC",
